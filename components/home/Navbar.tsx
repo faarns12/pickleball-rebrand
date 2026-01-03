@@ -1,12 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X, Utensils } from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   const navLinks = [
     { name: "About", href: "#about" },
@@ -16,9 +18,32 @@ const Navbar = () => {
     { name: "Blog", href: "#blog" },
   ];
 
+  // Hide on scroll down, show on scroll up
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        setIsVisible(false); // scrolling down
+      } else {
+        setIsVisible(true); // scrolling up
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
   return (
-    <nav className=" bg-white/20 backdrop-blur-sm sticky top-0 z-50">
-      <div className="w-11/12 mx-auto px-6 py-2">
+    <nav
+      className={`bg-white/20 backdrop-blur-sm sticky top-0 z-50
+        transition-transform duration-300 ease-in-out
+        ${isVisible ? "translate-y-0" : "-translate-y-30"}
+      `}
+    >
+      <div className="w-11/12 mx-auto px-4 md:px-6 py-4">
         {/* Top Row */}
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -33,14 +58,14 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-2">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="relative font-geist text-[#141414] font-medium transition-colors
-                  after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0
-                  after:bg-gray-900 after:transition-all hover:text-gray-900 hover:after:w-full"
+                className="bg-[#F7F7F7] md:px-4 lg:px-5 py-2.5 md:py-3.5 rounded-[14px]
+                  font-geist text-[#141414] font-medium
+                  hover:bg-gray-200 transition-colors text-sm md:text-base"
               >
                 {link.name}
               </Link>
@@ -49,7 +74,7 @@ const Navbar = () => {
 
           {/* Desktop Button */}
           <div className="hidden md:block">
-            <button className="bg-gray-900 hover:bg-gray-800 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-colors font-medium">
+            <button className="bg-[#0A2C23] hover:bg-[#051612] text-base font-geist text-[#FFFFFF] px-4 md:px-5 py-2.5 md:py-3.5 rounded-[14px] flex items-center gap-2 transition-colors font-medium">
               <Utensils size={18} />
               Explore Menu
             </button>
@@ -58,16 +83,10 @@ const Navbar = () => {
           {/* Mobile Toggle */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-gray-700 hover:text-gray-900 transition-transform duration-300"
+            className="md:hidden transition-transform duration-300"
             aria-label="Toggle menu"
           >
-            <span
-              className={`inline-block transition-transform duration-300 ${
-                isMenuOpen ? "rotate-90" : "rotate-0"
-              }`}
-            >
-              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-            </span>
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
 
@@ -81,19 +100,20 @@ const Navbar = () => {
             }
           `}
         >
-          <div className="mt-4 pb-4 space-y-4 border-t pt-4">
+          <div className="mt-3 md:mt-4 pb-4 space-y-3 md:space-y-4 border-t pt-3 md:pt-4">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="block text-gray-700 hover:text-gray-900 font-medium transition-colors py-2"
                 onClick={() => setIsMenuOpen(false)}
+                className="block py-2  hover:text-gray-900  font-geist text-[#141414] font-medium
+                  hover:bg-gray-200 transition-colors text-sm md:text-base"
               >
                 {link.name}
               </Link>
             ))}
 
-            <button className="w-full bg-gray-900 hover:bg-gray-800 text-white px-6 py-3 rounded-lg flex items-center justify-center gap-2 transition-colors font-medium">
+            <button className="w-full bg-[#0A2C23] hover:bg-[#051612] text-base font-geist text-[#FFFFFF] px-4 md:px-5 py-2.5 md:py-3.5 rounded-[14px] flex items-center gap-2 transition-colors font-medium">
               <Utensils size={18} />
               Explore Menu
             </button>

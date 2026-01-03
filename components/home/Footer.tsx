@@ -7,12 +7,12 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#0A0A0A] md:w-11/12  mx-auto px-6 md:px-8 lg:px-19.25 py-9.75 text-white rounded-tl-[50px] rounded-tr-[50px]">
+    <footer className="bg-[#0A0A0A] md:w-11/12   mx-auto px-6 md:px-8 lg:px-19.25 py-9.75 text-white rounded-tl-[50px] rounded-tr-[50px]">
      
         {/* Main Footer Content */}
-        <div className="flex flex-col md:flex-row justify-between gap-10 md:gap-14 pb-8  border-b border-[#767676]">
+        <div className="flex flex-col md:flex-row  justify-between gap-10 md:gap-14 pb-8  border-b border-[#767676]">
           {/* Left Section */}
-          <div className="lg:w-1/2 space-y-8">
+          <div className="lg:w-1/2 flex flex-col items-center md:items-start  space-y-8 ">
             {/* Logo */}
             <Image 
               src="/logo.png" 
@@ -22,15 +22,15 @@ const Footer = () => {
               className="w-16 h-16"
             />
 
-            <div className='flex flex-col gap-4'>
+            <div className='flex flex-col gap-4  items-center md:items-start '>
                 {/* Heading */}
-            <h2 className="text-3xl font-medium font-geist text-[#FFFFFF]">
+            <h2 className="text-3xl font-medium font-geist text-center md:text-left text-[#FFFFFF]">
              Ready to Experience the Pickleball?
             </h2>
 
             {/* Description */}
-            <p className="text-[#999999] text-base font-geist leading-relaxed">
-              If you`re looking for a branding who listens, understands,<br />
+            <p className="text-[#999999] text-center md:text-left text-base font-geist leading-relaxed">
+              If you`re looking for a branding who listens, understands,<br className="hidden md:block"/>
               and crafts with intention, let`s start the conversation
             </p>
 
@@ -40,7 +40,7 @@ const Footer = () => {
                 <PhoneCall   className='w-4 lg:w-5'/>
                 Reserve Your Spot
               </button>
-              <button className="bg-[#707070] hover:bg-gray-600 text-xs md:text-sm lg:text-base font-medium font-geist text-[#FFFFFF] px-12 md:px-4 py-3.5 rounded-[14px] flex items-center gap-1 transition-colors ">
+              <button className="bg-[#707070] hover:bg-gray-600 text-xs md:text-sm lg:text-base font-medium font-geist text-[#FFFFFF] px-10 md:px-4 py-3.5 rounded-[14px] flex items-center gap-1 transition-colors ">
                 View Menu
               </button>
             </div>
