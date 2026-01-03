@@ -40,7 +40,7 @@ const Footer = () => {
                 <PhoneCall   className='w-4 lg:w-5'/>
                 Reserve Your Spot
               </button>
-              <button className="bg-[#707070] hover:bg-gray-600 text-xs md:text-sm lg:text-base font-medium font-geist text-[#FFFFFF] px-12 md:px-4 py-3.5 rounded-[14px] flex items-center gap-1 transition-colors ">
+              <button className="bg-[#707070] hover:bg-gray-600 text-xs md:text-sm lg:text-base font-medium font-geist text-[#FFFFFF] px-10 md:px-4 py-3.5 rounded-[14px] flex items-center gap-1 transition-colors ">
                 View Menu
               </button>
             </div>
