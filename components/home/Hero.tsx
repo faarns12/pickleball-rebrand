@@ -26,7 +26,7 @@ const Hero = () => {
 
           {/* Reserve Button */}
         <div className="flex justify-center mb-4 md:mb-16">
-          <button className="bg-[#0A2C23] hover:to-red-700 text-xs shadow-[20px_20px_28.28px_-2px_rgba(0,0,0,0.15),7.87px_7.87px_11.13px_-1.6px_rgba(0,0,0,0.12)] md:text-sm lg:text-base font-medium font-geist text-[#FFFFFF] px-3 py-2.5 rounded-[14px] flex items-center gap-2 transition-colors">
+          <button className="bg-[#0A2C23] hover:bg-[#040f0c] cursor-pointer hover:to-red-700 text-xs shadow-[20px_20px_28.28px_-2px_rgba(0,0,0,0.15),7.87px_7.87px_11.13px_-1.6px_rgba(0,0,0,0.12)] md:text-sm lg:text-base font-medium font-geist text-[#FFFFFF] px-3 py-2.5 rounded-[14px] flex items-center gap-2 transition-colors">
            <span className=' px-3 py-2.5 bg-[#F63F00] rounded-[14px]'> <PhoneCall   className='w-5'/></span>
                 Reserve Your Spot
           </button>
@@ -65,7 +65,7 @@ const Hero = () => {
       <div className="relative z-10 container mx-auto px-4 ">
         {/* Video Section */}
         <div className="max-w-204.75 max-h-123.5 mx-auto">
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-black">
+          <div className="relative rounded-3xl overflow-hidden shadow-[28px_28px_28.28px_-2px_rgba(0,0,0,0.15),7.87px_7.87px_11.13px_-1.6px_rgba(0,0,0,0.12)] my-14 border-8 border-black">
             {/* Video placeholder - replace with actual video source */}
             <div className="relative aspect-video bg-linear-to-br from-gray-800 to-gray-900">
               <video
