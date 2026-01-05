@@ -1,28 +1,31 @@
-"use client"
-import React from 'react';
-import Image from 'next/image';
-import {  PhoneCall,  } from 'lucide-react';
+"use client";
+import React from "react";
+import Image from "next/image";
+import { PhoneCall } from "lucide-react";
 
 // Services data
 const servicesData = [
   {
     id: "01",
     title: "Tournaments & Events",
-    description: "From court reservations to professional coaching, we provide everything to make your pickleball journey exceptional.",
-    image: "/Services1.jpg"
+    description:
+      "From court reservations to professional coaching, we provide everything to make your pickleball journey exceptional.",
+    image: "/Services1.jpg",
   },
   {
     id: "02",
     title: "Pro Shop & Gear",
-    description: "From court reservations to professional coaching, we provide everything to make your pickleball journey exceptional.",
-    image: "/Services2.png"
+    description:
+      "From court reservations to professional coaching, we provide everything to make your pickleball journey exceptional.",
+    image: "/Services2.png",
   },
   {
     id: "03",
     title: "On-Court Dining",
-    description: "From court reservations to professional coaching, we provide everything to make your pickleball journey exceptional.",
-    image: "/Services3.jpg"
-  }
+    description:
+      "From court reservations to professional coaching, we provide everything to make your pickleball journey exceptional.",
+    image: "/Services3.jpg",
+  },
 ];
 
 const Services = () => {
@@ -31,11 +34,10 @@ const Services = () => {
       <div className=" mx-auto">
         {/* Top Badge */}
         <div className="flex justify-center mb-2">
-          
-           <div className="inline-flex items-center gap-2 bg-[#F7F7F7] text-[#F63F00] px-4 py-2 rounded-full font-geist mb-4">
-                      <Image src="/blog.svg" alt="Blog" width={18} height={18} />
-                      <span className="font-medium">Our Services/Programs</span>
-                    </div>
+          <div className="inline-flex items-center gap-2 bg-[#F7F7F7] text-[#F63F00] px-4 py-2 rounded-full font-geist mb-4">
+            <Image src="/blog.svg" alt="Blog" width={18} height={18} />
+            <span className="font-medium">Our Services/Programs</span>
+          </div>
         </div>
 
         {/* Heading */}
@@ -45,7 +47,8 @@ const Services = () => {
             <div className="text-[#0A0A0A]">Professional Services</div>
           </h2>
           <p className="text-[#707070] font-geist xl md:text-2xl  mx-auto">
-            From court reservations to professional coaching, we provide everything to <br className='hidden md:block'/>
+            From court reservations to professional coaching, we provide
+            everything to <br className="hidden md:block" />
             make your pickleball journey exceptional.
           </p>
         </div>
@@ -53,8 +56,11 @@ const Services = () => {
         {/* Reserve Button */}
         <div className="flex justify-center mb-10 md:mb-16">
           <button className="bg-[#0A2C23] hover:to-red-700 text-xs shadow-[20px_20px_28.28px_-2px_rgba(0,0,0,0.15),7.87px_7.87px_11.13px_-1.6px_rgba(0,0,0,0.12)] md:text-sm lg:text-base font-medium font-geist text-[#FFFFFF] px-3 py-2.5 rounded-[14px] flex items-center gap-2 transition-colors">
-           <span className=' px-3 py-3 bg-[#F63F00] rounded-[14px]'> <PhoneCall   className='w-5'/></span>
-                Reserve Your Spot
+            <span className=" px-3 py-2.5 bg-[#F63F00] rounded-[14px]">
+              {" "}
+              <PhoneCall className="w-5" />
+            </span>
+            Reserve Your Spot
           </button>
         </div>
 
@@ -72,7 +78,7 @@ const Services = () => {
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              
+
               {/* Dark Overlay */}
               <div className="absolute inset-0 bg-black/10 group-hover:bg-black/60 transition-colors duration-300"></div>
 
