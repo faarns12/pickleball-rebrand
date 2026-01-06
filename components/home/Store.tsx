@@ -104,7 +104,7 @@ export default function Store() {
   const displayProducts = sortedProducts;
 
   return (
-    <div className="text-white my-5">
+    <div id="store" className="text-white my-5 pt-10">
       <div className="w-full mx-auto rounded-[50px] bg-[#0A0A0A] py-10 sm:p-8 lg:p-12">
 
         {/* Header */}

@@ -34,7 +34,7 @@ const blogsData = [
 
 const Blogs = () => {
   return (
-    <section className=" py-16 px-2">
+    <section id='blog' className=" py-16 px-2 pt-10">
       <div className="w-full mx-auto">
         {/* Top Badge */}
        <div className="mb-6">

@@ -99,7 +99,7 @@ export default function FoodMenu() {
   const [activeCategory, setActiveCategory] = useState("quick-bites");
 
   return (
-    <div className="text-white my-5 ">
+    <div id="menu" className="text-white pt-10 my-5 ">
       <div className="w-full mx-auto rounded-[50px] md:max-h-193 bg-[#0A0A0A]  sm:p-8 lg:p-12 py-10">
         {/* Top Section */}
         <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-6 md:gap-0">

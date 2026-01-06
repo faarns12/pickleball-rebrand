@@ -30,7 +30,7 @@ const servicesData = [
 
 const Services = () => {
   return (
-    <section className=" py-10 px-2">
+    <section id="services" className=" py-10 px-2">
       <div className=" mx-auto">
         {/* Top Badge */}
         <div className="flex justify-center mb-2">

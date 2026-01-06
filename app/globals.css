@@ -171,3 +171,11 @@
   -ms-overflow-style: none;  /* IE & Edge */
   scrollbar-width: none;     /* Firefox */
 }
+body {
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  scrollbar-width: thin; /* optional: makes scrollbar thin */
+}
+html {
+  scroll-behavior: smooth;
+}

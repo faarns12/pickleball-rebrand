@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function About() {
   return (
-    <div className="  flex flex-col items-center   ">
+    <div id="about" className="  flex flex-col items-center  pt-10 ">
       {/* About Us Button */}
         <div className="flex justify-center mb-2">
                 <div className="inline-flex items-center gap-2 bg-[#F7F7F7] text-[#F63F00] px-4 py-2 rounded-full font-geist ">
