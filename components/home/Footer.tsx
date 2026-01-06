@@ -33,7 +33,11 @@ const Footer = () => {
               If you`re looking for a branding who listens, understands,<br className="hidden md:block"/>
               and crafts with intention, let`s start the conversation
             </p>
-
+            <p className="text-base mb-1 font-geist">Sat – Fri: 10:00 AM – 12:00 AM</p>
+<p className="text-base mb-1 font-geist">Contact: 01805-004753 / 01518-923582</p>
+<p className="text-base font-medium mb-8 font-geist">
+  Location: Rooftop, Haque Tower, Opposite Tower Inn Hotel, Jubilee Road, Chittagong
+</p>
             {/* Buttons */}
             <div className="flex gap-4">
               <Link href={"#Reserve"}><button className="bg-[#F63F00]  hover:bg-orange-800 text-xs md:text-sm lg:text-base font-medium font-geist text-[#FFFFFF] px-4 py-3.5 rounded-[14px] flex items-center gap-1 transition-colors ">
@@ -87,10 +91,10 @@ const Footer = () => {
                 <Link href="#linkedin">
                   <FaLinkedin size={30} className='text-[#828282]' />
                 </Link>
-                <Link href="#instagram">
+                <Link href="https://www.instagram.com/pickleball.bangladesh?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D">
                   <RiInstagramFill size={30} className='text-[#828282]' />
                 </Link>
-                <Link href="#facebook">
+                <Link href="https://www.facebook.com/profile.php?id=61571549000702">
                   <RiWhatsappLine size={30} className='text-[#828282]' />
                 </Link>
               </div>

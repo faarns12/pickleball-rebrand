@@ -149,7 +149,7 @@ export default function FoodMenu() {
             transition={{ duration: 1, delay: 0.6 }}
           >
             <p className="text-[#FFFFFF] lg:text-2xl text-sm md:text-lg mb-4 sm:mb-6 md:mb-8 leading-relaxed text-center md:text-left">
-              Explore a variety of tasty bites, refreshing drinks, and healthy treats.
+             Explore a variety of tasty bites, refreshing drinks, and healthy treats.
             </p>
           </motion.div>
         </motion.div>
