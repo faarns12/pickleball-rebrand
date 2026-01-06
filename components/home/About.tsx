@@ -80,8 +80,8 @@ export default function About() {
           />
         </motion.span>{" "}
         in Bangladesh. We are pioneering this exciting sport in the country,
-        building the trend from the ground up and inviting you to be part of
-        this historic first chapter.
+        building the trend from the ground up and <span className="text-[#F63F00]">inviting you to be part of
+        this historic first chapter.</span>
       </motion.p>
     </div>
   );
