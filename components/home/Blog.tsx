@@ -1,43 +1,15 @@
-"use client"
+"use client";
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-
-// Blog data in JSON format
-const blogsData = [
-  {
-    id: 1,
-    category: "Lifestyle",
-    date: "Apr 5, 2025",
-    title: "How to play Pickleball? A detailed guide",
-    image: "/blog.jpg",
-    slug: "how-to-play-pickleball-guide"
-  },
-  {
-    id: 2,
-    category: "Lifestyle",
-    date: "Apr 5, 2025",
-    title: "How to play Pickleball? A detailed guide",
-    image: "/blog.jpg",
-    slug: "how-to-play-pickleball-guide-2"
-  },
-  {
-    id: 3,
-    category: "Lifestyle",
-    date: "Apr 5, 2025",
-    title: "How to play Pickleball? A detailed guide",
-    image: "/blog.jpg",
-    slug: "how-to-play-pickleball-guide-3"
-  }
-];
+import { blogs } from "@/lib/blogs";
 
 const Blogs = () => {
   return (
     <motion.section
-      id='blog'
-      className="py-16 px-2 pt-10"
+      className="py-16 px-2"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
@@ -46,26 +18,32 @@ const Blogs = () => {
       <div className="w-full mx-auto">
 
         {/* Top Badge */}
-        <div className="mb-6">
+        <motion.div
+          className="mb-6"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <div className="inline-flex items-center gap-2 bg-[#F7F7F7] text-[#F63F00] px-4 py-2 rounded-full font-geist">
             <Image src="/blog.svg" alt="Blog" width={18} height={18} />
             <span className="font-medium">Blogs</span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Header */}
         <motion.div
           className="flex items-center justify-between mb-8"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
           <h2 className="md:text-4xl text-2xl lg:text-6xl font-bold">
             <span className="text-[#707070] font-geist">Pickle</span>
             <span className="text-[#0A0A0A] font-geist"> Blogs</span>
           </h2>
-
+          
           <Link 
             href="/blogs"
             className="flex items-center text-base font-geist bg-[#F7F7F7] px-3 py-2 rounded-[14px] gap-2 text-[#141414] hover:text-black font-medium transition-colors group"
@@ -78,8 +56,8 @@ const Blogs = () => {
         </motion.div>
 
         {/* Blog Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {blogsData.map((blog, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {blogs.map((blog, index) => (
             <motion.div
               key={blog.id}
               initial={{ opacity: 0, y: 50 }}
@@ -87,12 +65,8 @@ const Blogs = () => {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
             >
-              <Link 
-                href={`/blog/${blog.slug}`}
-                className="group"
-              >
+              <Link href={`/blog/${blog.id}`} className="group">
                 <div className="flex flex-col gap-2 overflow-hidden transition-all duration-300">
-
                   {/* Image */}
                   <div className="relative h-64 rounded-4xl overflow-hidden">
                     <Image
@@ -104,7 +78,7 @@ const Blogs = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="p-6 bg-[#F7F7F7] rounded-4xl">
+                  <div className="p-6 bg-[#F7F7F7] rounded-4xl min-h-50">
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-[#F63F00] font-geist font-medium text-sm px-3.5 py-2.5 bg-[#FFFFFF] rounded-full">
                         {blog.category}
@@ -113,7 +87,7 @@ const Blogs = () => {
                         {blog.date}
                       </span>
                     </div>
-
+                    
                     <h3 className="lg:text-2xl text-xl font-semibold font-geist text-[#0A0A0A] group-hover:text-orange-600 transition-colors">
                       {blog.title}
                     </h3>
