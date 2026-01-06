@@ -2,6 +2,8 @@
 import React from "react";
 import Image from "next/image";
 import { PhoneCall } from "lucide-react";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 // Services data
 const servicesData = [
@@ -33,15 +35,27 @@ const Services = () => {
     <section id="services" className=" py-10 px-2">
       <div className=" mx-auto">
         {/* Top Badge */}
-        <div className="flex justify-center mb-2">
+        <motion.div
+          className="flex justify-center mb-2"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
           <div className="inline-flex items-center gap-2 bg-[#F7F7F7] text-[#F63F00] px-4 py-2 rounded-full font-geist mb-4">
             <Image src="/blog.svg" alt="Blog" width={18} height={18} />
             <span className="font-medium">Our Services/Programs</span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Heading */}
-        <div className="text-center mb-6">
+        <motion.div
+          className="text-center mb-6"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.2 }}
+        >
           <h2 className="text-3xl md:text-[64px] font-geist font-bold mb-4">
             <div className="text-[#707070]  ">Empowering</div>
             <div className="text-[#0A0A0A]">Professional Services</div>
@@ -51,25 +65,34 @@ const Services = () => {
             everything to <br className="hidden md:block" />
             make your pickleball journey exceptional.
           </p>
-        </div>
+        </motion.div>
 
         {/* Reserve Button */}
-        <div className="flex justify-center mb-10 md:mb-16">
-          <button className="bg-[#0A2C23] hover:to-red-700 text-xs shadow-[20px_20px_28.28px_-2px_rgba(0,0,0,0.15),7.87px_7.87px_11.13px_-1.6px_rgba(0,0,0,0.12)] md:text-sm lg:text-base font-medium font-geist text-[#FFFFFF] px-3 py-2.5 rounded-[14px] flex items-center gap-2 transition-colors">
+        <motion.div
+          className="flex justify-center mb-10 md:mb-16"
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <Link href={"#Reserve"}><button className="bg-[#0A2C23] hover:to-red-700 text-xs shadow-[20px_20px_28.28px_-2px_rgba(0,0,0,0.15),7.87px_7.87px_11.13px_-1.6px_rgba(0,0,0,0.12)] md:text-sm lg:text-base font-medium font-geist text-[#FFFFFF] px-3 py-2.5 rounded-[14px] flex items-center gap-2 transition-colors">
             <span className=" px-3 py-2.5 bg-[#F63F00] rounded-[14px]">
-              {" "}
               <PhoneCall className="w-5" />
             </span>
             Reserve Your Spot
-          </button>
-        </div>
+          </button></Link>
+        </motion.div>
 
         {/* Service Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {servicesData.map((service) => (
-            <div
+          {servicesData.map((service, index) => (
+            <motion.div
               key={service.id}
               className="relative h-80 md:h-100 rounded-[50px] overflow-hidden group cursor-pointer"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 * index }}
             >
               {/* Background Image */}
               <Image
@@ -99,7 +122,7 @@ const Services = () => {
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

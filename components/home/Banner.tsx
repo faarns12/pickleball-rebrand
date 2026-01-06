@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import { Calendar } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Banner = () => {
   const [formData, setFormData] = useState({
@@ -13,7 +14,6 @@ const Banner = () => {
 
   const handleSubmit = () => {
     console.log('Form submitted:', formData);
-    // Handle form submission
     alert('Court booking submitted!');
   };
 
@@ -25,37 +25,60 @@ const Banner = () => {
   };
 
   return (
-    <section id='Reserve' className="relative pt-20 w-full min-h-128 flex items-center justify-center py-7.5 px-2 md:px-15.25 mb-5">
+    <motion.section
+      id='Reserve'
+      className="relative pt-20 w-full min-h-128 flex items-center justify-center py-7.5 px-2 md:px-15.25 mb-5"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.8 }}
+    >
       {/* Background Image */}
       <div 
-        className="absolute  rounded-[25px] inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: 'url("/banner.png")',
-        }}
+        className="absolute rounded-[25px] inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url("/banner.png")' }}
       >
-        <div className="absolute inset-0  rounded-[25px] bg-black/30"></div>
+        <div className="absolute inset-0 rounded-[25px] bg-black/30"></div>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full ">
+      <div className="relative z-10 w-full max-w-6xl">
+
         {/* Heading */}
-        <div className="text-center mb-12">
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+        >
           <h1 className="text-[40px] md:text-[60px] lg:text-[100px] font-bold text-[#FFFFFF] mb-4 drop-shadow-lg font-geist">
             Ready to Play?
           </h1>
-          <p className="text-white text-sm md:text-xl font-geist   max-w-3xl mx-auto ">
+          <p className="text-white text-sm md:text-xl font-geist max-w-3xl mx-auto">
             Tell us what you`re looking for, and our team will help you find the perfect
             student accommodation — quick, simple, and stress-free.
           </p>
-        </div>
+        </motion.div>
 
         {/* Form */}
-        <div className="bg-white/40 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
+        <motion.div
+          className="bg-white/40 backdrop-blur-sm rounded-2xl p-8 shadow-2xl"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7 }}
+        >
           <div className="space-y-6">
             {/* Row 1: Full Name, Date, Instructions */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* Full Name */}
-              <div>
+              {/** Full Name **/}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
                 <label htmlFor="fullName" className="block text-lg font-geist text-[#FFFFFF] mb-2">
                   Full Name
                 </label>
@@ -66,16 +89,19 @@ const Banner = () => {
                   onChange={handleChange}
                   className="w-full px-4 py-3 text-lg font-geist bg-[#dddbd8] border-2 border-white rounded-lg truncate focus:outline-none focus:ring-2 focus:ring-[#ff6900] text-[#707070] font-medium shadow-[0px_3px_4px_2px_#564F5C33]"
                 >
-                 
                   <option value="monash">Monash University</option>
                   <option value="melbourne">University of Melbourne</option>
                   <option value="rmit">RMIT University</option>
                 </select>
-                
-              </div>
+              </motion.div>
 
-              {/* Date */}
-              <div>
+              {/** Date **/}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
                 <label htmlFor="date" className="block text-lg font-geist text-[#FFFFFF] mb-2">
                   Date
                 </label>
@@ -87,14 +113,19 @@ const Banner = () => {
                     value={formData.date}
                     onChange={handleChange}
                     placeholder="DD-MM-YYYY"
-                    className="w-full px-4 py-3 text-lg font-geist bg-[#dddbd8] border-2 border-white rounded-lg truncate focus:outline-none focus:ring-2 focus:ring-[#ff6900] text-[#707070] font-medium "
+                    className="w-full px-4 py-3 text-lg font-geist bg-[#dddbd8] border-2 border-white rounded-lg truncate focus:outline-none focus:ring-2 focus:ring-[#ff6900] text-[#707070] font-medium"
                   />
-                  <Calendar className="absolute right-4 top-1/2 -translate-y-1/2  pointer-events-none" size={20} />
+                  <Calendar className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" size={20} />
                 </div>
-              </div>
+              </motion.div>
 
-              {/* Instructions */}
-              <div>
+              {/** Instructions **/}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
                 <label htmlFor="instructions" className="block text-lg font-geist text-[#FFFFFF] mb-2">
                   Any Instructions?
                 </label>
@@ -107,13 +138,18 @@ const Banner = () => {
                   placeholder="2 club sandwiches and a coke upon arrival"
                   className="w-full px-4 py-3 text-lg font-geist bg-[#dddbd8] border-2 border-white rounded-lg truncate focus:outline-none focus:ring-2 focus:ring-[#ff6900] text-[#707070] font-medium shadow-[0px_3px_4px_2px_#564F5C33]"
                 />
-              </div>
+              </motion.div>
             </div>
 
             {/* Row 2: Email, Arrival Time, Button */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-              {/* Email */}
-              <div>
+              {/** Email **/}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
                 <label htmlFor="email" className="block text-lg font-geist text-[#FFFFFF] mb-2">
                   Email
                 </label>
@@ -126,10 +162,15 @@ const Banner = () => {
                   placeholder="abc@example.com"
                   className="w-full px-4 py-3 text-lg font-geist bg-[#dddbd8] border-2 border-white rounded-lg truncate focus:outline-none focus:ring-2 focus:ring-[#ff6900] text-[#707070] font-medium shadow-[0px_3px_4px_2px_#564F5C33]"
                 />
-              </div>
+              </motion.div>
 
-              {/* Expected Arrival Time */}
-              <div>
+              {/** Arrival Time **/}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              >
                 <label htmlFor="arrivalTime" className="block text-lg font-geist text-[#FFFFFF] mb-2">
                   Expected Arrival Time
                 </label>
@@ -145,20 +186,24 @@ const Banner = () => {
                   <option value="8pm-9pm">8PM - 9PM</option>
                   <option value="9pm-10pm">9PM - 10PM</option>
                 </select>
-              </div>
+              </motion.div>
 
-              {/* Submit Button */}
-              <button
+              {/** Submit Button **/}
+              <motion.button
                 onClick={handleSubmit}
                 className="w-full px-4 py-3 text-lg font-geist bg-[#F63F00] border-2 border-white rounded-lg truncate focus:outline-none focus:ring-2 focus:ring-[#ff6900] text-white font-medium shadow-[0px_3px_4px_2px_#564F5C33]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
               >
                 Book My Court
-              </button>
+              </motion.button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 import {
   Select,
   SelectContent,
@@ -104,11 +105,24 @@ export default function Store() {
   const displayProducts = sortedProducts;
 
   return (
-    <div id="store" className="text-white my-5 pt-10">
+    <motion.section
+      id="store"
+      className="text-white my-5 pt-10"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.8 }}
+    >
       <div className="w-full mx-auto rounded-[50px] bg-[#0A0A0A] py-10 sm:p-8 lg:p-12">
 
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-6 mb-10 px-4 text-center md:text-left">
+        <motion.div
+          className="flex flex-col md:flex-row justify-between items-center md:items-end gap-6 mb-10 px-4 text-center md:text-left"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+        >
           <div className="flex flex-col items-center md:items-start">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800 rounded-full mb-6 mx-auto md:mx-0 justify-center md:justify-start">
               <Image src="/food.svg" alt="Store" width={18} height={18} />
@@ -123,10 +137,16 @@ export default function Store() {
           <p className="text-sm sm:text-lg lg:text-2xl max-w-xl mt-4 md:mt-0 mx-auto md:mx-0 md:text-right">
             Gear up with high-quality equipment built for comfort and durability.
           </p>
-        </div>
+        </motion.div>
 
         {/* Filters */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 px-4">
+        <motion.div
+          className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 px-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5 }}
+        >
           <Select value={selectedCategory} onValueChange={setSelectedCategory}>
             <SelectTrigger className="w-full sm:w-45 bg-white text-black rounded-lg">
               <SelectValue placeholder="Select category" />
@@ -147,29 +167,38 @@ export default function Store() {
               <SelectItem value="low-to-high">Price low to high</SelectItem>
             </SelectContent>
           </Select>
-        </div>
+        </motion.div>
 
         {/* Products Horizontal Scroll */}
-        <div className="relative px-4 my-6">
+        <motion.div
+          className="relative px-4 my-6"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7 }}
+        >
           <div
             ref={scrollRef}
             className="flex flex-nowrap gap-4 sm:gap-6 overflow-x-auto scroll-smooth pb-4 hide-scrollbar cursor-grab"
           >
             {displayProducts.map(product => (
-              <div
+              <motion.div
                 key={product.id}
                 className="snap-start shrink-0 w-55 sm:w-65 md:w-75 bg-white text-black rounded-2xl p-4 sm:p-6 hover:scale-105 transition-transform cursor-pointer"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5 }}
               >
-                <div className="relative w-full h-50  mb-4 rounded-xl overflow-hidden">
+                <div className="relative w-full h-50 mb-4 rounded-xl overflow-hidden">
                   <Image src={product.image} alt={product.name} fill className="object-cover" />
                 </div>
                 <h3 className="font-semibold text-base sm:text-lg line-clamp-1">{product.name}</h3>
-              
                 <p className="text-black font-bold mt-2">${product.price}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {displayProducts.length === 0 && (
           <div className="text-center text-gray-400 py-12">
@@ -177,6 +206,6 @@ export default function Store() {
           </div>
         )}
       </div>
-    </div>
+    </motion.section>
   );
 }

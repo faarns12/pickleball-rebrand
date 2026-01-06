@@ -13,7 +13,7 @@ const Hero = () => {
   ];
 
   return (
-    <div className="relative bg-white overflow-hidden mt-5 md:mt-10">
+    <div id="home" className="relative bg-white overflow-hidden mt-5 md:mt-10">
       {/* Header Section */}
       <motion.div
         className="text-center max-w-5xl mx-auto mb-12"
