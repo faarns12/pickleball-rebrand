@@ -12,7 +12,7 @@ import Store from "@/components/home/Store";
 
 export default function Home() {
   return (
-    <div className=" flex flex-col  md:pt-10">
+    <div className=" flex flex-col mt-5 md:pt-10">
       <Hero></Hero>
        <About></About>
 <div className="w-11/12 mx-auto ">

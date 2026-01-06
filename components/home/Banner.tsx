@@ -25,7 +25,7 @@ const Banner = () => {
   };
 
   return (
-    <section className="relative w-full min-h-128 flex items-center justify-center py-7.5 px-2 md:px-15.25 mb-5">
+    <section id='Reserve' className="relative pt-20 w-full min-h-128 flex items-center justify-center py-7.5 px-2 md:px-15.25 mb-5">
       {/* Background Image */}
       <div 
         className="absolute  rounded-[25px] inset-0 bg-cover bg-center bg-no-repeat"
