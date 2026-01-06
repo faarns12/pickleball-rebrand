@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-
+import { motion } from "framer-motion";
 // JSON Data
 const menuData = {
   categories: [
@@ -99,31 +99,60 @@ export default function FoodMenu() {
   const [activeCategory, setActiveCategory] = useState("quick-bites");
 
   return (
-    <div className="text-white my-5 ">
-      <div className="w-full mx-auto rounded-[50px] md:max-h-193 bg-[#0A0A0A]  sm:p-8 lg:p-12 py-10">
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }} id="menu"
+     className="text-white my-5 pt-10 ">
+     <div className="w-full mx-auto rounded-[50px] md:max-h-193 bg-[#0A0A0A] sm:p-8 lg:p-12 py-10">
         {/* Top Section */}
-        <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-6 md:gap-0">
+        <motion.div
+          className="flex flex-col md:flex-row items-center md:items-end justify-between gap-6 md:gap-0"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
           <div>
             {/* Food Menu Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800 rounded-full mb-6 sm:mb-8">
+            <motion.div
+              className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800 rounded-full mb-6 sm:mb-8"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
               <Image src="/food.svg" alt="Blog" width={18} height={18} />
               <span className="text-[#F63F00] font-geist font-medium">Food Menu</span>
-            </div>
+            </motion.div>
 
             {/* Title */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-geist font-bold mb-4  lg:mb-6">
+            <motion.h1
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-geist font-bold mb-4 lg:mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.4 }}
+            >
               <span className="text-gray-400">Our Delicious</span>
               <br />
               <span className="text-white">Food Menu</span>
-            </h1>
+            </motion.h1>
           </div>
-          <div className="max-w-97.5">
-            <p className="text-[#FFFFFF] lg:text-2xl text-sm md:text-lg mb-4   sm:mb-6 md:mb-8 leading-relaxed text-center md:text-left">
-              Explore a variety of tasty bites, refreshing drinks, and healthy
-              treats.
+
+          <motion.div
+            className="max-w-97.5"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.6 }}
+          >
+            <p className="text-[#FFFFFF] lg:text-2xl text-sm md:text-lg mb-4 sm:mb-6 md:mb-8 leading-relaxed text-center md:text-left">
+              Explore a variety of tasty bites, refreshing drinks, and healthy treats.
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Grid Section */}
         <div className="flex md:flex-row flex-col gap-8 lg:gap-12">
@@ -189,6 +218,6 @@ export default function FoodMenu() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

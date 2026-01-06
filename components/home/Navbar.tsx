@@ -74,10 +74,10 @@ const Navbar = () => {
 
           {/* Desktop Button */}
           <div className="hidden md:block">
-            <button className="bg-[#0A2C23] hover:bg-[#051612] text-base font-geist text-[#FFFFFF] px-4 md:px-5 py-2.5 md:py-3.5 rounded-[14px] flex items-center gap-2 transition-colors font-medium">
+          <Link href={"#menu"}>  <button className="bg-[#0A2C23] hover:bg-[#051612] text-base font-geist text-[#FFFFFF] px-4 md:px-5 py-2.5 md:py-3.5 rounded-[14px] flex items-center gap-2 transition-colors font-medium">
               <Utensils size={18} />
               Explore Menu
-            </button>
+            </button></Link>
           </div>
 
           {/* Mobile Toggle */}
@@ -92,33 +92,32 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out
-            ${
-              isMenuOpen
-                ? "max-h-96 opacity-100 translate-y-0"
-                : "max-h-0 opacity-0 -translate-y-2"
-            }
-          `}
-        >
-          <div className="mt-3 md:mt-4 pb-4 space-y-3 md:space-y-4 border-t pt-3 md:pt-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsMenuOpen(false)}
-                className="block py-2  hover:text-gray-900  font-geist text-[#141414] font-medium
-                  hover:bg-gray-200 transition-colors text-sm md:text-base"
-              >
-                {link.name}
-              </Link>
-            ))}
+  className={`
+    absolute w-full md:hidden px-6 left-0 bg-white/95 backdrop-blur-sm z-50 overflow-hidden
+    transition-all duration-300 ease-in-out
+    ${isMenuOpen ? "max-h-96 opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-2"}
+    md:static md:max-h-full md:opacity-100 md:translate-y-0 md:flex md:items-center md:space-x-6 md:bg-transparent md:backdrop-blur-0
+  `}
+>
+  <div className="mt-3 md:mt-0 pb-4 space-y-3 md:space-y-0 md:flex md:items-center md:pb-0 border-t md:border-0 pt-3 md:pt-0">
+    {navLinks.map((link) => (
+      <Link
+        key={link.name}
+        href={link.href}
+        onClick={() => setIsMenuOpen(false)}
+        className="block py-2 px-4 md:px-0 hover:text-gray-900 font-geist text-[#141414] font-medium hover:bg-gray-200 transition-colors text-sm md:text-base md:hover:bg-transparent"
+      >
+        {link.name}
+      </Link>
+    ))}
 
-            <button className="w-full bg-[#0A2C23] hover:bg-[#051612] text-base font-geist text-[#FFFFFF] px-4 md:px-5 py-2.5 md:py-3.5 rounded-[14px] flex items-center gap-2 transition-colors font-medium">
-              <Utensils size={18} />
-              Explore Menu
-            </button>
-          </div>
-        </div>
+    <Link href={"#menu"}>  <button className="w-full md:w-auto bg-[#0A2C23] hover:bg-[#051612] text-base font-geist text-[#FFFFFF] px-4 md:px-5 py-2.5 md:py-3.5 rounded-[14px] flex items-center gap-2 transition-colors font-medium">
+      <Utensils size={18} />
+      Explore Menu
+    </button></Link>
+  </div>
+</div>
+
       </div>
     </nav>
   );

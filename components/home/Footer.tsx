@@ -36,13 +36,13 @@ const Footer = () => {
 
             {/* Buttons */}
             <div className="flex gap-4">
-              <button className="bg-[#F63F00]  hover:bg-orange-800 text-xs md:text-sm lg:text-base font-medium font-geist text-[#FFFFFF] px-4 py-3.5 rounded-[14px] flex items-center gap-1 transition-colors ">
+              <Link href={"#Reserve"}><button className="bg-[#F63F00]  hover:bg-orange-800 text-xs md:text-sm lg:text-base font-medium font-geist text-[#FFFFFF] px-4 py-3.5 rounded-[14px] flex items-center gap-1 transition-colors ">
                 <PhoneCall   className='w-4 lg:w-5'/>
                 Reserve Your Spot
-              </button>
-              <button className="bg-[#707070] hover:bg-gray-600 text-xs md:text-sm lg:text-base font-medium font-geist text-[#FFFFFF] px-10 md:px-4 py-3.5 rounded-[14px] flex items-center gap-1 transition-colors ">
+              </button></Link>
+            <Link href={"#menu"}>  <button className="bg-[#707070] hover:bg-gray-600 text-xs md:text-sm lg:text-base font-medium font-geist text-[#FFFFFF] px-10 md:px-4 py-3.5 rounded-[14px] flex items-center gap-1 transition-colors ">
                 View Menu
-              </button>
+              </button></Link>
             </div>
             </div>
           </div>
@@ -58,20 +58,20 @@ const Footer = () => {
                 <a href="#store" className="block text-[#FFFFFF] text-lg font-medium font-geist hover:text-gray-300 transition-colors">
                   STORE
                 </a>
-                <a href="#blogs" className="block text-[#FFFFFF] text-lg font-medium font-geist hover:text-gray-300 transition-colors">
+                <a href="#blog" className="block text-[#FFFFFF] text-lg font-medium font-geist hover:text-gray-300 transition-colors">
                   BLOGS
                 </a>
               </div>
               <div className="space-y-5 text-center md:text-right">
-                <a href="#home" className="block text-[#FFFFFF] text-lg font-medium font-geist hover:text-gray-300 transition-colors">
+                <Link href="/" className="block text-[#FFFFFF] text-lg font-medium font-geist hover:text-gray-300 transition-colors">
                   HOME
-                </a>
-                <a href="#menu" className="block text-[#FFFFFF] text-lg font-medium font-geist hover:text-gray-300 transition-colors">
+                </Link>
+                <Link href="#menu" className="block text-[#FFFFFF] text-lg font-medium font-geist hover:text-gray-300 transition-colors">
                   MENU
-                </a>
-                <a href="#services" className="block text-[#FFFFFF] text-lg font-medium font-geist hover:text-gray-300 transition-colors">
+                </Link>
+                <Link href="#services" className="block text-[#FFFFFF] text-lg font-medium font-geist hover:text-gray-300 transition-colors">
                   SERVICES
-                </a>
+                </Link>
               </div>
             </div>
 
