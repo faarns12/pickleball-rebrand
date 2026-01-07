@@ -123,7 +123,7 @@ export default function Store() {
         >
           <div className="flex flex-col items-center md:items-start">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800 rounded-full mb-6 mx-auto md:mx-0 justify-center md:justify-start">
-              <Image src="/food.svg" alt="Store" width={18} height={18} />
+              <Image src="/ddd.svg" alt="Store" width={18} height={18} className="text-[#F63F00] " />
               <span className="text-[#F63F00] font-medium">Store</span>
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold">
