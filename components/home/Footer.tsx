@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import { PhoneCall } from "lucide-react";
-import { FaLinkedin, FaXTwitter } from "react-icons/fa6";
-import { RiInstagramFill, RiWhatsappLine } from "react-icons/ri";
+import { FaFacebook, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { RiInstagramFill,  } from "react-icons/ri";
 import Link from "next/link";
 
 const Footer = () => {
@@ -124,7 +124,7 @@ const Footer = () => {
                 <RiInstagramFill size={30} className="text-[#828282]" />
               </Link>
               <Link href="https://www.facebook.com/profile.php?id=61571549000702">
-                <RiWhatsappLine size={30} className="text-[#828282]" />
+                <FaFacebook  size={30} className="text-[#828282]" />
               </Link>
             </div>
           </div>
