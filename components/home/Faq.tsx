@@ -59,7 +59,7 @@ export default function Faq() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <Image src="/blog.svg" alt="Blog" width={18} height={18} />
+              <Image src="/shield-question-mark.svg" alt="Blog" width={18} height={18} />
               <span className="font-medium">FAQ</span>
             </motion.div>
 

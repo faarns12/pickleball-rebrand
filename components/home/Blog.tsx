@@ -26,7 +26,7 @@ const Blogs = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="inline-flex items-center gap-2 bg-[#F7F7F7] text-[#F63F00] px-4 py-2 rounded-full font-geist">
-            <Image src="/blog.svg" alt="Blog" width={18} height={18} />
+            <Image src="/book-open-check.svg" alt="Blog" width={18} height={18} />
             <span className="font-medium">Blogs</span>
           </div>
         </motion.div>
