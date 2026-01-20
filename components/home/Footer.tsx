@@ -35,7 +35,7 @@ const Footer = () => {
              
             </p>
             <p className="text-base mb-1 font-geist">
-              Sat – Fri: 10:00 AM – 12:00 AM
+              Sat – Fri: 10:00 AM – 12:45 AM
             </p>
             <p className="text-base mb-1 font-geist">
               Contact: 01805-004753 / 01518-923582

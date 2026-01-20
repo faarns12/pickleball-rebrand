@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Calendar } from "lucide-react";
 import { motion } from "framer-motion";
-import toast from "react-hot-toast";
+
 /* ================= GOOGLE FORM CONFIG ================= */
 
 const GOOGLE_FORM_ID = "1FAIpQLSfieeagrmUalhla5yKX7Rr_cEz7J_cRainYT3ymQRS2nezvWw";
@@ -22,14 +22,16 @@ const Banner = () => {
     fullName: "",
     email: "",
     date: "",
-    arrivalTime: "",
+    arrivalTime: [] as string[], // CHANGED: Array instead of string
     instructions: "",
   });
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   /* ================= HANDLERS ================= */
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setFormData({
       ...formData,
@@ -37,9 +39,19 @@ const Banner = () => {
     });
   };
 
+  // NEW: Handler for toggling time slots
+  const handleTimeSlotToggle = (timeSlot: string) => {
+    setFormData(prev => ({
+      ...prev,
+      arrivalTime: prev.arrivalTime.includes(timeSlot)
+        ? prev.arrivalTime.filter(t => t !== timeSlot)
+        : [...prev.arrivalTime, timeSlot]
+    }));
+  };
+
   const handleSubmit = async () => {
     if (!formData.fullName || !formData.email || !formData.date) {
-    toast.error("Please fill all required fields.");
+      alert("Please fill all required fields.");
       return;
     }
 
@@ -48,7 +60,7 @@ const Banner = () => {
       data.append(ENTRY_IDS.fullName, formData.fullName);
       data.append(ENTRY_IDS.email, formData.email);
       data.append(ENTRY_IDS.date, formData.date);
-      data.append(ENTRY_IDS.arrivalTime, formData.arrivalTime);
+      data.append(ENTRY_IDS.arrivalTime, formData.arrivalTime.join(", ")); // CHANGED: Join array
       data.append(ENTRY_IDS.instructions, formData.instructions);
 
       await fetch(GOOGLE_FORM_ACTION, {
@@ -57,23 +69,44 @@ const Banner = () => {
         body: data,
       });
 
-     
-       toast.success("Court booking submitted! 🎾");
+      alert("Court booking submitted! 🎾");
 
       setFormData({
         fullName: "",
         email: "",
         date: "",
-        arrivalTime: "",
+        arrivalTime: [], // CHANGED: Empty array
         instructions: "",
       });
     } catch (error) {
       console.error(error);
-   
-          toast.error("Please try again");
-
+      alert("Please try again");
     }
   };
+
+  const timeSlots = [
+    { value: "10:00-10:45", label: "10:00 AM - 10:45 AM" },
+    { value: "10:45-11:30", label: "10:45 AM - 11:30 AM" },
+    { value: "11:30-12:15", label: "11:30 AM - 12:15 PM" },
+    { value: "12:15-13:00", label: "12:15 PM - 1:00 PM" },
+    { value: "13:00-13:45", label: "1:00 PM - 1:45 PM" },
+    { value: "13:45-14:30", label: "1:45 PM - 2:30 PM" },
+    { value: "14:30-15:15", label: "2:30 PM - 3:15 PM" },
+    { value: "15:15-16:00", label: "3:15 PM - 4:00 PM" },
+    { value: "16:00-16:45", label: "4:00 PM - 4:45 PM" },
+    { value: "16:45-17:30", label: "4:45 PM - 5:30 PM" },
+    { value: "17:30-18:15", label: "5:30 PM - 6:15 PM" },
+    { value: "18:15-19:00", label: "6:15 PM - 7:00 PM" },
+    { value: "19:00-19:45", label: "7:00 PM - 7:45 PM" },
+    { value: "19:45-20:30", label: "7:45 PM - 8:30 PM" },
+    { value: "20:30-21:15", label: "8:30 PM - 9:15 PM" },
+    { value: "21:15-22:00", label: "9:15 PM - 10:00 PM" },
+    { value: "22:00-22:45", label: "10:00 PM - 10:45 PM" },
+    { value: "22:45-23:30", label: "10:45 PM - 11:30 PM" },
+    { value: "23:30-00:15", label: "11:30 PM - 12:15 AM" },
+    { value: "00:15-00:45", label: "12:15 AM - 12:45 AM" }
+  ];
+
   return (
     <motion.section
       id='Reserve'
@@ -106,7 +139,7 @@ const Banner = () => {
             Ready to Play?
           </h1>
           <p className="text-white text-sm md:text-xl font-geist max-w-3xl mx-auto">
-            Tell us what you`re looking for, and our team will help you find the perfect
+            Tell us what you're looking for, and our team will help you find the perfect
             student accommodation — quick, simple, and stress-free.
           </p>
         </motion.div>
@@ -132,16 +165,15 @@ const Banner = () => {
                 <label htmlFor="fullName" className="block text-lg font-geist text-[#FFFFFF] mb-2">
                   Full Name
                 </label>
-                 <input
-                    type="fullName"
-                    id="fullName"
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    placeholder="Enter your Name"
-                    className="w-full px-4 py-3 text-lg font-geist bg-[#dddbd8] border-2 border-white rounded-lg truncate focus:outline-none focus:ring-2 focus:ring-[#ff6900] text-[#707070] font-medium"
-                  />
-                
+                <input
+                  type="text"
+                  id="fullName"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  placeholder="Enter your Name"
+                  className="w-full px-4 py-3 text-lg font-geist bg-[#dddbd8] border-2 border-white rounded-lg truncate focus:outline-none focus:ring-2 focus:ring-[#ff6900] text-[#707070] font-medium"
+                />
               </motion.div>
 
               {/** Date **/}
@@ -213,67 +245,65 @@ const Banner = () => {
                 />
               </motion.div>
 
-          {/** Arrival Time **/}
-<motion.div
-  initial={{ opacity: 0, y: 20 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true, amount: 0.3 }}
-  transition={{ duration: 0.5, delay: 0.5 }}
-  className="w-full"
->
-  <label
-    htmlFor="arrivalTime"
-    className="
-      block 
-      text-base sm:text-lg 
-      font-geist 
-      text-white 
-      mb-2 sm:mb-3
-    "
-  >
-    Expected Arrival Time
-  </label>
+              {/** Arrival Time - MULTI-SELECT **/}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className="w-full"
+              >
+                <label
+                  htmlFor="arrivalTime"
+                  className="block text-base sm:text-lg font-geist text-white mb-2 sm:mb-3"
+                >
+                  Expected Arrival Time
+                </label>
 
-  <select
-    id="arrivalTime"
-    name="arrivalTime"
-    value={formData.arrivalTime}
-    onChange={handleChange}
-    className="
-      w-full
-      px-3 sm:px-4
-      py-2.5 sm:py-3
-      text-base sm:text-lg
-      font-geist
-      bg-[#dddbd8]
-      border-2 border-white
-      rounded-lg
-      focus:outline-none
-      focus:ring-2 focus:ring-[#ff6900]
-      text-[#707070] font-medium
-      shadow-[0px_3px_4px_2px_#564F5C33]
-      truncate
-    "
-  >
-    <option value="">Select time...</option>
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-base sm:text-lg font-geist bg-[#dddbd8] border-2 border-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff6900] text-[#707070] font-medium shadow-[0px_3px_4px_2px_#564F5C33] text-left flex justify-between items-center"
+                  >
+                    <span className="truncate">
+                      {formData.arrivalTime.length === 0
+                        ? "Select time slots..."
+                        : `${formData.arrivalTime.length} slot${formData.arrivalTime.length > 1 ? 's' : ''} selected`}
+                    </span>
+                    <svg className="w-5 h-5 ml-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
 
-    <option value="10-10:45">10.00 AM - 10.45 AM</option>
-    <option value="11-11:45">11.00 AM - 11.45 AM</option>
-    <option value="12-12:45">12.00 PM - 12.45 PM</option>
-    <option value="13-13:45">1.00 PM - 1.45 PM</option>
-    <option value="14-14:45">2.00 PM - 2.45 PM</option>
-    <option value="15-15:45">3.00 PM - 3.45 PM</option>
-    <option value="16-16:45">4.00 PM - 4.45 PM</option>
-    <option value="17-17:45">5.00 PM - 5.45 PM</option>
-    <option value="18-18:45">6.00 PM - 6.45 PM</option>
-    <option value="19-19:45">7.00 PM - 7.45 PM</option>
-    <option value="20-20:45">8.00 PM - 8.45 PM</option>
-    <option value="21-21:45">9.00 PM - 9.45 PM</option>
-    <option value="22-22:45">10.00 PM - 10.45 PM</option>
-    <option value="23-23:45">11.00 PM - 11.45 PM</option>
-  </select>
-</motion.div>
-
+                  {isDropdownOpen && (
+                    <div className="absolute z-20 w-full mt-1 bg-white border-2 border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                      {timeSlots.map((slot) => {
+                        const isSelected = formData.arrivalTime.includes(slot.value);
+                        return (
+                          <div
+                            key={slot.value}
+                            onClick={() => handleTimeSlotToggle(slot.value)}
+                            className={`px-4 py-2 cursor-pointer hover:bg-[#F63F00] hover:text-white transition-colors ${
+                              isSelected ? 'bg-[#F63F00] text-white' : 'text-gray-700'
+                            }`}
+                          >
+                            <div className="flex items-center">
+                              <input
+                                type="checkbox"
+                                checked={isSelected}
+                                onChange={() => {}}
+                                className="mr-3 w-4 h-4 accent-[#F63F00]"
+                              />
+                              <span className="font-geist text-sm sm:text-base">{slot.label}</span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              </motion.div>
 
               {/** Submit Button **/}
               <motion.button
