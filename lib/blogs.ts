@@ -5,7 +5,7 @@ export const blogs = [
     slug: "pickleball-arrives-chittagong",
     date: "December 1, 2025",
     category: "Sports",
-    author: "Md. Tarek",
+    author: "Pickleball",
     readingTime: "6 min read",
     image: "/blog11.jpg",
     content: `
@@ -29,7 +29,7 @@ For now, we are focused on building the foundation with care and honesty. The sp
     slug: "Sports",
     date: "December 1, 2025",
     category: "Sports",
-    author: "Md. Tarek",
+    author: "Pickleball",
     readingTime: "6 min read",
     image: "/blog222.jpg",
     content: `
@@ -159,7 +159,7 @@ Pickleball is simple, exciting, and perfect for people who want a sport that’s
     slug: "pickleball-beginners-guide",
     date: "February 1, 2025",
     category: "Training",
-    author: "Md. Tarek",
+    author: "Pickleball",
     readingTime: "7 min read",
     image: "/blog3.png",
     content: `
@@ -198,7 +198,7 @@ Following these basics will make your first match fun and less stressful.
     slug: "pickleball-food-menu-top-items",
     date: "December 11, 2025",
     category: "Sports",
-    author: "Md. Tarek",
+    author: "Pickleball",
     readingTime: "4 min read",
     image: "/blogss.png",
     content: `
