@@ -3,6 +3,8 @@ export const blogs = [
     id: 1,
     title: "Pickleball Arrives in Bangladesh: A New Beginning in Chittagong",
     slug: "pickleball-arrives-chittagong",
+    excerpt:
+      "Pickleball has now arrived in Bangladesh, and people in Chittagong finally have a place to enjoy this modern and exciting sport.",
     date: "December 1, 2025",
     category: "Sports",
     author: "Pickleball",
@@ -27,6 +29,8 @@ For now, we are focused on building the foundation with care and honesty. The sp
     title:
       "How to Play Pickleball: Simple Rules and a Great Place to Try It in Chittagong",
     slug: "Sports",
+    excerpt:
+      "Pickleball is a fun, fast, and easy sport that people of all ages can play, and our rooftop court in Chittagong is a great place to learn it.",
     date: "December 1, 2025",
     category: "Sports",
     author: "Pickleball",
@@ -157,6 +161,8 @@ Pickleball is simple, exciting, and perfect for people who want a sport that’s
     id: 3,
     title: "Beginner’s Guide: What to Know Before Your First Match",
     slug: "pickleball-beginners-guide",
+    excerpt:
+      "Starting pickleball can be fun, but it helps to know the basics before your first match.",
     date: "February 1, 2025",
     category: "Training",
     author: "Pickleball",
@@ -194,8 +200,11 @@ Following these basics will make your first match fun and less stressful.
   },
   {
     id: 4,
-    title: "পিকলবল কী আর কিভাবে খেলবেন - Pickleball Rules Bangla তে স্টেপ বাই স্টেপ",
+    title:
+      "পিকলবল কী আর কিভাবে খেলবেন - Pickleball Rules Bangla তে স্টেপ বাই স্টেপ",
     slug: "pickleball-food-menu-top-items",
+    excerpt:
+      "পিকলবল কী, খুব সহজ: ব্যাডমিন্টন-সদৃশ কোর্ট, টেনিসের মতো নেট আর প্লাস্টিকের একটি হালকা বল দিয়ে গঠিত এক মজার খেলা।",
     date: "December 11, 2025",
     category: "Sports",
     author: "Pickleball",
