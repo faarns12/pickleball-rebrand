@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { Menu, X, Utensils } from "lucide-react";
 
 const Navbar = () => {
@@ -10,31 +11,67 @@ const Navbar = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
+  const pathname = usePathname();
+  const router = useRouter();
+  const isHomePage = pathname === "/";
+
   const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Menu", href: "#menu" },
-    { name: "Store", href: "#store" },
-    { name: "Blog", href: "#blog" },
+    { name: "About", sectionId: "about" },
+    { name: "Services", sectionId: "services" },
+    { name: "Menu", sectionId: "menu" },
+    { name: "Store", sectionId: "store" },
+    { name: "Blog", sectionId: "blog" },
   ];
 
-  // Hide on scroll down, show on scroll up
+  /* ── hide/show on scroll ── */
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
       if (currentScrollY > lastScrollY && currentScrollY > 80) {
-        setIsVisible(false); // scrolling down
+        setIsVisible(false);
       } else {
-        setIsVisible(true); // scrolling up
+        setIsVisible(true);
       }
-
       setLastScrollY(currentScrollY);
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
+
+  /* ── smart click handler ──
+     Home page  → smooth scroll to #sectionId
+     Other page → Blog goes to /blog, rest go to /#sectionId
+  ── */
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string,
+  ) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+
+    if (isHomePage) {
+      document
+        .getElementById(sectionId)
+        ?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      if (sectionId === "blog") {
+        router.push("/blog");
+      } else {
+        router.push(`/#${sectionId}`);
+      }
+    }
+  };
+
+  /* ── "Explore Menu" CTA handler ── */
+  const handleMenuCTA = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    if (isHomePage) {
+      document.getElementById("menu")?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      router.push("/#menu");
+    }
+  };
 
   return (
     <nav
@@ -44,7 +81,7 @@ const Navbar = () => {
       `}
     >
       <div className="w-11/12 mx-auto px-4 md:px-6 py-4">
-        {/* Top Row */}
+        {/* ── Top Row ── */}
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="shrink-0">
@@ -57,30 +94,39 @@ const Navbar = () => {
             />
           </Link>
 
-          {/* Desktop Links */}
+          {/* Desktop nav links */}
           <div className="hidden md:flex items-center space-x-2">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.name}
-                href={link.href}
+                href={
+                  isHomePage
+                    ? `#${link.sectionId}`
+                    : link.sectionId === "blog"
+                      ? "/blog"
+                      : `/#${link.sectionId}`
+                }
+                onClick={(e) => handleNavClick(e, link.sectionId)}
                 className="bg-[#F7F7F7] md:px-4 lg:px-5 py-2.5 md:py-3.5 rounded-[14px]
                   font-geist text-[#141414] font-medium
-                  hover:bg-gray-200 transition-colors text-sm md:text-base"
+                  hover:bg-gray-200 transition-colors text-sm md:text-base cursor-pointer"
               >
                 {link.name}
-              </Link>
+              </a>
             ))}
           </div>
 
-          {/* Desktop Button */}
+          {/* Desktop CTA */}
           <div className="hidden md:block">
-          <Link href={"#menu"}>  <button className="bg-[#0A2C23] hover:bg-[#051612] text-base font-geist text-[#FFFFFF] px-4 md:px-5 py-2.5 md:py-3.5 rounded-[14px] flex items-center gap-2 transition-colors font-medium">
-              <Utensils size={18} />
-              Explore Menu
-            </button></Link>
+            <a href={isHomePage ? "#menu" : "/#menu"} onClick={handleMenuCTA}>
+              <button className="bg-[#0A2C23] hover:bg-[#051612] text-base font-geist text-white px-4 md:px-5 py-2.5 md:py-3.5 rounded-[14px] flex items-center gap-2 transition-colors font-medium">
+                <Utensils size={18} />
+                Explore Menu
+              </button>
+            </a>
           </div>
 
-          {/* Mobile Toggle */}
+          {/* Mobile hamburger */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden transition-transform duration-300"
@@ -90,34 +136,47 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* ── Mobile Menu ── */}
         <div
-  className={`
-    absolute w-full md:hidden px-6 left-0 bg-white/95 backdrop-blur-sm z-50 overflow-hidden
-    transition-all duration-300 ease-in-out
-    ${isMenuOpen ? "max-h-96 opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-2"}
-    md:static md:max-h-full md:opacity-100 md:translate-y-0 md:flex md:items-center md:space-x-6 md:bg-transparent md:backdrop-blur-0
-  `}
->
-  <div className="mt-3 md:mt-0 pb-4 space-y-3 md:space-y-0 md:flex md:items-center md:pb-0 border-t md:border-0 pt-3 md:pt-0">
-    {navLinks.map((link) => (
-      <Link
-        key={link.name}
-        href={link.href}
-        onClick={() => setIsMenuOpen(false)}
-        className="block py-2 px-4 md:px-0 hover:text-gray-900 font-geist text-[#141414] font-medium hover:bg-gray-200 transition-colors text-sm md:text-base md:hover:bg-transparent"
-      >
-        {link.name}
-      </Link>
-    ))}
+          className={`
+            absolute w-full md:hidden px-6 left-0 bg-white/95 backdrop-blur-sm z-50 overflow-hidden
+            transition-all duration-300 ease-in-out
+            ${
+              isMenuOpen
+                ? "max-h-96 opacity-100 translate-y-0"
+                : "max-h-0 opacity-0 -translate-y-2"
+            }
+          `}
+        >
+          <div className="mt-3 pb-4 space-y-1 border-t pt-3">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={
+                  isHomePage
+                    ? `#${link.sectionId}`
+                    : link.sectionId === "blog"
+                      ? "/blog"
+                      : `/#${link.sectionId}`
+                }
+                onClick={(e) => handleNavClick(e, link.sectionId)}
+                className="block py-2.5 px-4 rounded-xl font-geist text-[#141414] font-medium
+                  hover:bg-gray-100 transition-colors text-sm cursor-pointer"
+              >
+                {link.name}
+              </a>
+            ))}
 
-    <Link href={"#menu"}>  <button className="w-full md:w-auto bg-[#0A2C23] hover:bg-[#051612] text-base font-geist text-[#FFFFFF] px-4 md:px-5 py-2.5 md:py-3.5 rounded-[14px] flex items-center gap-2 transition-colors font-medium">
-      <Utensils size={18} />
-      Explore Menu
-    </button></Link>
-  </div>
-</div>
-
+            <div className="pt-2">
+              <a href={isHomePage ? "#menu" : "/#menu"} onClick={handleMenuCTA}>
+                <button className="w-full bg-[#0A2C23] hover:bg-[#051612] text-base font-geist text-white px-4 py-2.5 rounded-[14px] flex items-center gap-2 transition-colors font-medium">
+                  <Utensils size={18} />
+                  Explore Menu
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </nav>
   );

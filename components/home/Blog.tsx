@@ -1,9 +1,9 @@
 "use client";
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import { blogs } from "@/lib/blogs";
 
 const Blogs = () => {
@@ -15,8 +15,7 @@ const Blogs = () => {
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.8 }}
     >
-      <div className="w-full mx-auto">
-
+      <div className="w-full mx-auto" id="blog">
         {/* Top Badge */}
         <motion.div
           className="mb-6"
@@ -26,7 +25,12 @@ const Blogs = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="inline-flex items-center gap-2 bg-[#F7F7F7] text-[#F63F00] px-4 py-2 rounded-full font-geist">
-            <Image src="/book-open-check.svg" alt="Blog" width={18} height={18} />
+            <Image
+              src="/book-open-check.svg"
+              alt="Blog"
+              width={18}
+              height={18}
+            />
             <span className="font-medium">Blogs</span>
           </div>
         </motion.div>
@@ -43,9 +47,9 @@ const Blogs = () => {
             <span className="text-[#707070] font-geist">Pickle</span>
             <span className="text-[#0A0A0A] font-geist"> Blogs</span>
           </h2>
-          
-          <Link 
-            href="/blogs"
+
+          <Link
+            href="/blog"
             className="flex items-center text-base font-geist bg-[#F7F7F7] px-3 py-2 rounded-[14px] gap-2 text-[#141414] hover:text-black font-medium transition-colors group"
           >
             <span>All Blog</span>
@@ -87,7 +91,7 @@ const Blogs = () => {
                         {blog.date}
                       </span>
                     </div>
-                    
+
                     <h3 className="lg:text-2xl text-xl font-semibold font-geist text-[#0A0A0A] group-hover:text-orange-600 transition-colors">
                       {blog.title}
                     </h3>
