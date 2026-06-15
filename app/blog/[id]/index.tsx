@@ -7,9 +7,6 @@ import Link from "next/link";
 import { useRef } from "react";
 import { Blog } from "@/types/blog";
 
-/* ─────────────────────────────────────────────
-   ANIMATION VARIANTS
-───────────────────────────────────────────── */
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
   visible: { opacity: 1, y: 0 },
@@ -30,7 +27,7 @@ function ReadingProgress() {
   return (
     <motion.div
       style={{ scaleX, transformOrigin: "left" }}
-      className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-green-500 to-emerald-400 z-50 origin-left"
+      className="fixed top-0 left-0 right-0 h-0.5 bg-linear-to-r from-green-500 to-emerald-400 z-50 origin-left"
     />
   );
 }
@@ -54,19 +51,36 @@ function HeroImage({ src, alt }: { src: string; alt: string }) {
     >
       <motion.div style={{ y }} className="absolute inset-0 scale-110">
         <Image src={src} alt={alt} fill className="object-cover" priority />
-        {/* cinematic dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/50" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/10 via-transparent to-black/50" />
       </motion.div>
     </div>
   );
 }
 
 /* ─────────────────────────────────────────────
-   CONTENT PARSER — markdown-lite
+   CONTENT RENDERER
+   Supports:
+   - Rich HTML from Tiptap editor (new blogs)
+   - Legacy markdown-lite syntax (old blogs)
 ───────────────────────────────────────────── */
 function BlogContent({ content }: { content: string }) {
-  const lines = content.split("\n");
+  const isHtml = content.trimStart().startsWith("<");
 
+  if (isHtml) {
+    return (
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={fadeIn}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="rich-content"
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
+    );
+  }
+
+  // Legacy markdown-lite renderer (backward compatibility)
+  const lines = content.split("\n");
   return (
     <div className="space-y-0">
       {lines.map((line, i) => {
@@ -156,17 +170,17 @@ function BlogContent({ content }: { content: string }) {
    MAIN COMPONENT
 ───────────────────────────────────────────── */
 export default function BlogDetails({ blog }: { blog: Blog }) {
-  const tags = blog.tags ?? ["Design", "Insights", "Strategy"];
+  const tags = blog.tags ?? [];
 
   return (
     <>
       <ReadingProgress />
 
       <main className="w-full min-h-screen bg-[#FAFAF8]">
-        {/* ── HERO ─────────────────────────────── */}
+        {/* HERO */}
         <HeroImage src={blog.image} alt={blog.title} />
 
-        {/* ── FLOATING CARD HEADER ─────────────── */}
+        {/* FLOATING CARD HEADER */}
         <div className="w-full max-w-3xl mx-auto px-5 md:px-0 -mt-24 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -174,7 +188,7 @@ export default function BlogDetails({ blog }: { blog: Blog }) {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="bg-white rounded-3xl shadow-2xl shadow-black/10 px-8 md:px-14 pt-10 pb-8"
           >
-            {/* Category chip + reading time */}
+            {/* Category + reading time */}
             <div className="flex flex-wrap items-center gap-3 mb-5">
               <span className="inline-flex items-center px-3.5 py-1 rounded-full bg-green-50 border border-green-200 text-green-700 text-xs font-semibold font-satoshi tracking-wide uppercase">
                 {blog.category}
@@ -195,8 +209,7 @@ export default function BlogDetails({ blog }: { blog: Blog }) {
               {blog.title}
             </motion.h1>
 
-            {/* Divider */}
-            <div className="w-12 h-[3px] bg-green-500 rounded-full mb-6" />
+            <div className="w-12 h-0.75 bg-green-500 rounded-full mb-6" />
 
             {/* Author row */}
             <motion.div
@@ -206,15 +219,9 @@ export default function BlogDetails({ blog }: { blog: Blog }) {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="flex items-center gap-3"
             >
-              {/* Avatar */}
               <div className="w-10 h-10 rounded-full bg-green-100 border-2 border-green-300 overflow-hidden shrink-0 relative">
                 {blog.authorAvatar ? (
-                  <Image
-                    src={blog.authorAvatar}
-                    alt={blog.author}
-                    fill
-                    className="object-cover"
-                  />
+                  <Image src={blog.authorAvatar} alt={blog.author} fill className="object-cover" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-green-700 font-bold text-sm font-figtree">
                     {blog.author.charAt(0).toUpperCase()}
@@ -222,20 +229,15 @@ export default function BlogDetails({ blog }: { blog: Blog }) {
                 )}
               </div>
               <div>
-                <p className="font-satoshi font-semibold text-gray-900 text-sm leading-tight">
-                  {blog.author}
-                </p>
-                <p className="font-satoshi text-gray-400 text-xs mt-0.5">
-                  {blog.date}
-                </p>
+                <p className="font-satoshi font-semibold text-gray-900 text-sm leading-tight">{blog.author}</p>
+                <p className="font-satoshi text-gray-400 text-xs mt-0.5">{blog.date}</p>
               </div>
             </motion.div>
           </motion.div>
         </div>
 
-        {/* ── BODY ─────────────────────────────── */}
+        {/* BODY */}
         <div className="w-full max-w-3xl mx-auto px-5 md:px-0 mt-12 pb-24">
-          {/* Article content */}
           <article className="bg-white rounded-3xl shadow-sm border border-gray-100 px-8 md:px-14 py-12">
             <BlogContent content={blog.content} />
 
@@ -261,7 +263,7 @@ export default function BlogDetails({ blog }: { blog: Blog }) {
             )}
           </article>
 
-          {/* ── AUTHOR BIO CARD ─────────────────── */}
+          {/* AUTHOR BIO */}
           {blog.authorBio && (
             <motion.div
               initial="hidden"
@@ -273,12 +275,7 @@ export default function BlogDetails({ blog }: { blog: Blog }) {
             >
               <div className="w-14 h-14 rounded-2xl bg-green-100 border-2 border-green-200 overflow-hidden shrink-0 relative">
                 {blog.authorAvatar ? (
-                  <Image
-                    src={blog.authorAvatar}
-                    alt={blog.author}
-                    fill
-                    className="object-cover"
-                  />
+                  <Image src={blog.authorAvatar} alt={blog.author} fill className="object-cover" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-green-700 font-bold text-xl font-figtree">
                     {blog.author.charAt(0).toUpperCase()}
@@ -286,17 +283,13 @@ export default function BlogDetails({ blog }: { blog: Blog }) {
                 )}
               </div>
               <div>
-                <p className="font-figtree font-bold text-gray-900 text-base mb-0.5">
-                  {blog.author}
-                </p>
-                <p className="font-satoshi text-gray-500 text-sm leading-relaxed">
-                  {blog.authorBio}
-                </p>
+                <p className="font-figtree font-bold text-gray-900 text-base mb-0.5">{blog.author}</p>
+                <p className="font-satoshi text-gray-500 text-sm leading-relaxed">{blog.authorBio}</p>
               </div>
             </motion.div>
           )}
 
-          {/* ── BACK BUTTON ──────────────────────── */}
+          {/* BACK BUTTON */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -316,11 +309,7 @@ export default function BlogDetails({ blog }: { blog: Blog }) {
                 strokeWidth={2.2}
                 viewBox="0 0 24 24"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 19l-7-7 7-7"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
               </svg>
               Back to Blog
             </Link>
