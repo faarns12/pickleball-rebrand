@@ -13,4 +13,5 @@ export interface Blog {
   tags?: string[];
   authorAvatar?: string;
   authorBio?: string;
+  is_active?: boolean;
 }
