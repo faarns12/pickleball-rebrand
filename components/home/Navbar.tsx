@@ -49,16 +49,14 @@ const Navbar = () => {
     e.preventDefault();
     setIsMenuOpen(false);
 
-    if (isHomePage) {
+    if (sectionId === "blog") {
+      router.push("/blog");
+    } else if (isHomePage) {
       document
         .getElementById(sectionId)
         ?.scrollIntoView({ behavior: "smooth" });
     } else {
-      if (sectionId === "blog") {
-        router.push("/blog");
-      } else {
-        router.push(`/#${sectionId}`);
-      }
+      router.push(`/#${sectionId}`);
     }
   };
 
@@ -100,10 +98,10 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={
-                  isHomePage
-                    ? `#${link.sectionId}`
-                    : link.sectionId === "blog"
-                      ? "/blog"
+                  link.sectionId === "blog"
+                    ? "/blog"
+                    : isHomePage
+                      ? `#${link.sectionId}`
                       : `/#${link.sectionId}`
                 }
                 onClick={(e) => handleNavClick(e, link.sectionId)}
@@ -153,10 +151,10 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={
-                  isHomePage
-                    ? `#${link.sectionId}`
-                    : link.sectionId === "blog"
-                      ? "/blog"
+                  link.sectionId === "blog"
+                    ? "/blog"
+                    : isHomePage
+                      ? `#${link.sectionId}`
                       : `/#${link.sectionId}`
                 }
                 onClick={(e) => handleNavClick(e, link.sectionId)}
