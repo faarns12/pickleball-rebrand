@@ -26,6 +26,16 @@ const navItems = [
       </svg>
     ),
   },
+  {
+    href: "/admin/food-menu",
+    label: "Food Menu",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth={1.8} fill="none" />
+      </svg>
+    ),
+  },
 ];
 
 export default function AdminSidebar() {

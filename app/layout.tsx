@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/home/Footer";
-import Navbar from "@/components/home/Navbar";
+import ConditionalLayout from "@/components/ConditionalLayout";
 import  { Toaster } from "react-hot-toast";
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,12 +28,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="">
-          <Navbar></Navbar>
-          <div className="min-h-screen ">{children}</div>
+        <ConditionalLayout>
+          {children}
           <Toaster position="top-right" />
-          <Footer></Footer>
-        </div>
+        </ConditionalLayout>
       </body>
     </html>
   );
