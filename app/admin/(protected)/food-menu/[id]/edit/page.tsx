@@ -1,10 +1,13 @@
 import { notFound } from "next/navigation";
-import { getFoodMenuItemByIdAdmin, updateFoodMenuItem } from "@/app/admin/food-menu-actions";
+import { getFoodMenuItemByIdAdmin, updateFoodMenuItem, getFoodMenuCategories } from "@/app/admin/food-menu-actions";
 import FoodMenuForm from "../../FoodMenuForm";
 
 export default async function EditFoodMenuItemPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const item = await getFoodMenuItemByIdAdmin(Number(id));
+  const [item, existingCategories] = await Promise.all([
+    getFoodMenuItemByIdAdmin(Number(id)),
+    getFoodMenuCategories(),
+  ]);
   if (!item) notFound();
 
   const action = async (formData: FormData) => {
@@ -30,6 +33,7 @@ export default async function EditFoodMenuItemPage({ params }: { params: Promise
             is_active: item.is_active,
           }}
           submitLabel="Save Changes"
+          existingCategories={existingCategories}
         />
       </div>
     </div>

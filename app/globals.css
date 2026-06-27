@@ -40,6 +40,14 @@
   font-family: "Figtree", sans-serif;
 }
 @import "tailwindcss";
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));

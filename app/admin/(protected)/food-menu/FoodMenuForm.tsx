@@ -3,15 +3,6 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 
-const CATEGORIES = [
-  "Quick Bites",
-  "Healthy Snacks",
-  "Set Meals",
-  "Beverages",
-  "Hot Drinks",
-  "Sweet Treats",
-];
-
 interface FoodMenuFormData {
   name?: string;
   description?: string;
@@ -25,9 +16,10 @@ interface FoodMenuFormProps {
   action: (formData: FormData) => Promise<void>;
   initialData?: FoodMenuFormData;
   submitLabel: string;
+  existingCategories?: string[];
 }
 
-export default function FoodMenuForm({ action, initialData, submitLabel }: FoodMenuFormProps) {
+export default function FoodMenuForm({ action, initialData, submitLabel, existingCategories = [] }: FoodMenuFormProps) {
   const [isActive, setIsActive] = useState(initialData?.is_active ?? true);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
@@ -92,17 +84,23 @@ export default function FoodMenuForm({ action, initialData, submitLabel }: FoodM
 
         {/* Category */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">Category *</label>
-          <select
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">
+            Category *
+            <span className="text-gray-400 font-normal ml-1">(type new or pick existing)</span>
+          </label>
+          <input
             name="category"
-            defaultValue={initialData?.category || "Quick Bites"}
+            list="category-options"
+            defaultValue={initialData?.category || ""}
             required
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm bg-white"
-          >
-            {CATEGORIES.map((c) => (
-              <option key={c} value={c}>{c}</option>
+            placeholder="e.g. Quick Bites"
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
+          />
+          <datalist id="category-options">
+            {existingCategories.map((c) => (
+              <option key={c} value={c} />
             ))}
-          </select>
+          </datalist>
         </div>
 
         {/* Price */}

@@ -83,3 +83,14 @@ export async function getFoodMenuItemByIdAdmin(id: number): Promise<any | null> 
   return data;
 }
 
+export async function getFoodMenuCategories(): Promise<string[]> {
+  const supabase = getAdminClient();
+  const { data, error } = await supabase
+    .from('food_menu')
+    .select('category')
+    .order('category', { ascending: true });
+  if (error || !data) return [];
+  const unique = [...new Set(data.map((r: any) => r.category as string))];
+  return unique;
+}
+
