@@ -3,7 +3,6 @@ import { getAllBlogsAdmin } from "@/app/admin/actions";
 
 export default async function AdminDashboard() {
   const blogs = await getAllBlogsAdmin();
-
   const total = blogs.length;
   const active = blogs.filter((b) => b.is_active).length;
   const inactive = total - active;
