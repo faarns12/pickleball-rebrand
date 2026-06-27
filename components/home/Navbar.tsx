@@ -51,6 +51,8 @@ const Navbar = () => {
 
     if (sectionId === "blog") {
       router.push("/blog");
+    } else if (sectionId === "menu") {
+      router.push("/menu");
     } else if (isHomePage) {
       document
         .getElementById(sectionId)
@@ -64,11 +66,7 @@ const Navbar = () => {
   const handleMenuCTA = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     setIsMenuOpen(false);
-    if (isHomePage) {
-      document.getElementById("menu")?.scrollIntoView({ behavior: "smooth" });
-    } else {
-      router.push("/#menu");
-    }
+    router.push("/menu");
   };
 
   return (
@@ -100,9 +98,11 @@ const Navbar = () => {
                 href={
                   link.sectionId === "blog"
                     ? "/blog"
-                    : isHomePage
-                      ? `#${link.sectionId}`
-                      : `/#${link.sectionId}`
+                    : link.sectionId === "menu"
+                      ? "/menu"
+                      : isHomePage
+                        ? `#${link.sectionId}`
+                        : `/#${link.sectionId}`
                 }
                 onClick={(e) => handleNavClick(e, link.sectionId)}
                 className="bg-[#F7F7F7] md:px-4 lg:px-5 py-2.5 md:py-3.5 rounded-[14px]
@@ -153,9 +153,11 @@ const Navbar = () => {
                 href={
                   link.sectionId === "blog"
                     ? "/blog"
-                    : isHomePage
-                      ? `#${link.sectionId}`
-                      : `/#${link.sectionId}`
+                    : link.sectionId === "menu"
+                      ? "/menu"
+                      : isHomePage
+                        ? `#${link.sectionId}`
+                        : `/#${link.sectionId}`
                 }
                 onClick={(e) => handleNavClick(e, link.sectionId)}
                 className="block py-2.5 px-4 rounded-xl font-geist text-[#141414] font-medium
